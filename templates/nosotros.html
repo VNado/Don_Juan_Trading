@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+    </header>
+<main class="nosotros nosotros__contenedor">
+        <h2 class="nosotros__heading">Nosotros</h2>
+
+        <div class="nosotros__grid">
+            <img src="{{ url_for('static', filename='img/nosotros.png') }}" alt="imagen nosotros">
+
+            <div class="nosotros__contenido">
+                <p>El Legado que construimos día con día como Pueblo Mágico representando la Cultura del Mezcal en el corazón de México, lugar donde inicio la leyenda de “Urajan de Luna” quien gracias a su valor y sacrificio recuperó el agua que nutre hoy en día los hermosos paisajes en donde se desarrolló el pueblo de Nombre de Dios, Durango.</p>
+
+                <p>En las instalaciones de la Vinata Cuero Viejo, donde se produce el Mezcal, se encuentra la choza donde solía descansar después de vigilar los alrededores desde lo alto de los cerros en tiempos de conquista y en la cual su presencia es evidente por las noches de Luna llena, según relatos de habitantes.</p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

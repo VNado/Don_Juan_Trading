@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+            <div class="modelo">
+                <h1 class="modelo__nombre">Plata</h1>
+                <p class="modelo__descripcion">Suave, refinado, avainillado y muy sutil al paladar. Por su baja graduación en alcohol y su delicadez, es apto para aquellas personas que degustaran el Mezcal por primera vez. Es ligero en aromas y sabores, el mezcla ideal para la elaboración de cócteles, originando un sabor exquisito de alta calidad, versátil para crear bebidas.</p>
+                <p class="modelo__precio">$799</p>
+                <a class="modelo__enlace" href="{{ url_for('producto3') }}">Ver Producto</a>
+            </div>
+        </div>
+
+        <img class="header__mezcal" src="{{ url_for('static', filename='img/header_mezcal.png') }}" alt="imagen header mezcal">
+    </header>
+
+
+    <main class="productos productos__contenedor">
+        <h2 class="productos__heading">Lo que tenemos para ti</h2>
+
+        <div class="productos__grid">
+
+            <div class="producto">
+                <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_01.png') }}" alt="imagen mezcal">
+
+                <div class="producto__contenido">
+                    <h3 class="producto__nombre">Sangre de Indio</h3>
+                    <p class="producto__descripcion">Retrogusto agradable con notas aromáticas de la madera, y agave dulce.</p>
+                    <p class="producto__precio">$499</p>
+                    <a class="producto__enlace" href="{{ url_for('producto1') }}">Ver Producto</a>
+                </div>
+            </div><!--./producto-->
+
+            <div class="producto">
+                <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_02.png') }}" alt="imagen mezcal">
+
+                <div class="producto__contenido">
+                    <h3 class="producto__nombre">Fantasma</h3>
+                    <p class="producto__descripcion">Mezcal con ligeros aromas frutales y leves notas a quiote.</p>
+                    <p class="producto__precio">$299</p>
+                    <a class="producto__enlace" href="{{ url_for('producto2') }}">Ver Producto</a>
+                </div>
+            </div><!--./producto-->
+
+            <div class="producto">
+                <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_03.png') }}" alt="imagen mezcal">
+
+                <div class="producto__contenido">
+                    <h3 class="producto__nombre">Plata</h3>
+                    <p class="producto__descripcion">Retrogusto suave, dulce, terminado con un buen fin de boca ligero a madera, agave y peron. </p>
+                    <p class="producto__precio">$799</p>
+                    <a class="producto__enlace" href="{{ url_for('producto3') }}">Ver Producto</a>
+                </div>
+            </div><!--./producto-->
+
+        </div><!--./productos__grid-->
+    </main>
+
+    <section class="cursos">
+        <div class="cursos__contenedor cursos__grid">
+            <div class="cursos__contenido">
+                <h2 class="cursos__heading">Nuestra cultura</h2>
+                <p class="cursos__texto">El Legado que construimos día con día como Pueblo Mágico representando la Cultura del Mezcal en el corazón de México, lugar donde inicio la leyenda de “Urajan de Luna” quien gracias a su valor y sacrificio recuperó el agua que nutre hoy en día los hermosos paisajes en donde se desarrolló el pueblo de Nombre de Dios, Durango.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog">
+        <h2 class="blog__heading">Conoce nuestros procesos</h2>
+        <div class="blog__contenedor blog__grid">
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/coccion_1.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Cocción</h3>
+                    <p class="entrada__fecha">Primer proceso</p>
+                    <p class="entrada__texto">El proceso de elaboración del mezcal es totalmente artesanal por realizar la cocción del agave Cenizo Durangensis...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__coccion">Leer mas</a>
+                    <!--.entrada.html#proceso__coccion-->
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/molienda_2.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Molienda</h3>
+                    <p class="entrada__fecha">Segundo proceso</p>
+                    <p class="entrada__texto">La molienda se realiza en una tahona, con ayuda de una mula que jala una rueda de cantera. Se utiliza este proceso para...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__molienda">Leer mas</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/fermentacion_3.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Fermentación</h3>
+                    <p class="entrada__fecha">Tercer proceso</p>
+                    <p class="entrada__texto">La fermentación es 100% Natural y se realiza en tinas de madera de encino por un periodo de 3-5 días dependiendo...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__fermentacion">Leer mas</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/destilacion_4.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Destilación</h3>
+                    <p class="entrada__fecha">Cuarto proceso</p>
+                    <p class="entrada__texto">El producto obtenido de la primer destilación se conoce como ordinario o agua Vino, por su bajo contenido de...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__destilacion">Leer mas</a>
+                </div>
+            </article>
+        </div>
+    </section>
+{% endblock %}

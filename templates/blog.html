@@ -1,0 +1,57 @@
+{% extends "layout1.html" %}
+{% block body %}
+
+<body>
+{% endblock %}
+
+{% block main %}
+    <main class="contenedor">
+        <h2 class="heading">Conoce nuestros procesos</h2>
+
+        <div class="blog__contenedor blog__grid blog__grid--pagina">
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/coccion_1.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Cocción</h3>
+                    <p class="entrada__fecha">Primer proceso</p>
+                    <p class="entrada__texto">El proceso de elaboración del mezcal es totalmente artesanal por realizar la cocción del agave Cenizo Durangensis...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__coccion">Leer mas</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/molienda_2.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Molienda</h3>
+                    <p class="entrada__fecha">Segundo proceso</p>
+                    <p class="entrada__texto">La molienda se realiza en una tahona, con ayuda de una mula que jala una rueda de cantera. Se utiliza este proceso para...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__molienda">Leer mas</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/fermentacion_3.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Fermentación</h3>
+                    <p class="entrada__fecha">Tercer proceso</p>
+                    <p class="entrada__texto">La fermentación es 100% Natural y se realiza en tinas de madera de encino por un periodo de 3-5 días dependiendo...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__fermentacion">Leer mas</a>
+                </div>
+            </article>
+
+            <article class="entrada">
+                <img class="entrada__imagen" src="{{ url_for('static', filename='img/destilacion_4.png') }}" alt="imagen blog">
+
+                <div class="entrada__contenido">
+                    <h3 class="entrada__titulo">Destilación</h3>
+                    <p class="entrada__fecha">Cuarto proceso</p>
+                    <p class="entrada__texto">El producto obtenido de la primer destilación se conoce como ordinario o agua Vino, por su bajo contenido de...</p>
+                    <a class="entrada__enlace" href="/entrada/proceso__destilacion">Leer mas</a>
+                </div>
+            </article>
+        </div>
+    </main>
+{% endblock %}

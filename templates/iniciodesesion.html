@@ -1,0 +1,16 @@
+{% extends 'layout3.html' %}
+{% block title %}
+<title>Don Juan Trading: Inicio de Sesión</title>
+{% endblock %}
+{% block body %}
+
+<body class="background__registro">
+
+    <section class="fomulario__registro">
+        <h4>Inicio de Sesión</h4>
+        <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+        <input class="controls" type="password" name="correo" id="correo" placeholder="Ingrese su Contraseña">
+        <a href="#index.html"><input class="botons" type="submit" value="Iniciar Sesión"></a><!--funcionalidad python-->
+        <p><a href="{{ url_for('registro1') }}">¿Aún no tienes una cuenta?</a></p>
+    </section>
+{% endblock %}

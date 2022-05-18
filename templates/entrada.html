@@ -1,0 +1,82 @@
+{% extends "layout1.html" %}
+{% block body %}
+
+<script>
+    function a() {
+        document.getElementById("{{ ira }}").scrollIntoView();
+    }
+</script>
+
+<body onload="a()">
+{% endblock %}
+
+{% block main %}
+    <main class="contenedor">
+        <h2 class="heading" id="proceso__coccion">Cocción</h2>
+
+        <article class="entrada">
+            <img class="entrada__imagen" src="{{ url_for('static', filename='img/coccion_1.png') }}" alt="imagen blog">
+
+            <div class="entrada__contenido">
+                <h3 class="entrada__titulo">Cocción</h3>
+                <p class="entrada__fecha">Primer proceso</p>
+
+                <p class="entrada__texto">El proceso de elaboración del mezcal es totalmente artesanal por realizar la
+                    cocción del agave Cenizo Durangensis bajo tierra, molienda en tahona, fermentación natural en tinas
+                    de madera a nivel del suelo y destilación en alambiques de cobre en un horno cónico de piedra
+                    volcánica.</p>
+
+            </div>
+        </article>
+
+        <h2 class="heading" id="proceso__molienda">Molienda</h2>
+
+        <article class="entrada">
+            <img class="entrada__imagen" src="{{ url_for('static', filename='img/molienda_2.png') }}" alt="imagen blog">
+
+            <div class="entrada__contenido">
+                <h3 class="entrada__titulo">Molienda</h3>
+                <p class="entrada__fecha">Segundo proceso</p>
+
+                <p class="entrada__texto">La molienda se realiza en una tahona, con ayuda de una mula que jala una rueda
+                    de cantera. Se utiliza este proceso para extraer los jugos y aromas de forma natural y así las
+                    levaduras logren entrar en calor naturalmente.</p>
+
+            </div>
+        </article>
+
+        <h2 class="heading" id="proceso__fermentacion">Fermentación</h2>
+
+        <article class="entrada">
+            <img class="entrada__imagen" src="{{ url_for('static', filename='img/fermentacion_3.png') }}"
+                alt="imagen blog">
+
+            <div class="entrada__contenido">
+                <h3 class="entrada__titulo">Fermentación</h3>
+                <p class="entrada__fecha">Tercer proceso</p>
+                <p class="entrada__texto">La fermentación es 100% Natural y se realiza en tinas de madera de encino por
+                    un periodo de 3-5 días dependiendo las condiciones del clima y del capricho de las levaduras. Una
+                    vez llevada a cabo la fermentación se realiza la primera y segunda destilación de los mostos en 2
+                    alambiques de cobre.</p>
+
+            </div>
+        </article>
+
+        <h2 class="heading" id="proceso__destilacion">Destilación</h2>
+
+        <article class="entrada">
+            <img class="entrada__imagen" src="{{ url_for('static', filename='img/destilacion_4.png') }}"
+                alt="imagen blog">
+
+            <div class="entrada__contenido">
+                <h3 class="entrada__titulo">Destilación</h3>
+                <p class="entrada__fecha">Cuarto proceso</p>
+                <p class="entrada__texto">El producto obtenido de la primer destilación se conoce como ordinario o agua
+                    Vino, por su bajo contenido de alcohol. Este producto es rectificado (2da destilación) nuevamente
+                    para poder obtener el mezcal 100% agave, previa separación y eliminación de los productos
+                    denominados puntas y colas de mezcal.</p>
+            </div>
+        </article>
+
+    </main>
+{% endblock %}

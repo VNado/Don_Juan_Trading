@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Juan Trading</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__contenedor">
+            <div class="header__barra">
+                <a href="/">
+                    <img class="header__logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="imagen logo">
+                </a>
+                <nav class="navegacion">
+                    <a class="navegacion__enlace" href="{{ url_for('index') }}">Inicio</a>
+                    <a class="navegacion__enlace" href="{{ url_for('nosotros') }}">Nosotros</a>
+                    <a class="navegacion__enlace" href="{{ url_for('proceso') }}">Proceso</a>
+                    <a class="navegacion__enlace" href="{{ url_for('tienda') }}">Tienda</a>
+                    <a class="navegacion__enlace" href="{{ url_for('carrito') }}">Carrito</a>
+                    <a class="navegacion__enlace" href="{{ url_for('iniciodesesion') }}">Inicio de Sesión</a>
+                    <a class="navegacion__enlace" href="{{ url_for('registro1') }}">Registrarse</a>
+                </nav>
+            </div><!--.header-barra-->
+
+{% block body %}
+{% endblock %}
+
+<footer class="footer">
+    <div class="footer__contenedor footer__contenido">
+        <nav class="footer__nav">
+            <a class="footer__enlace" href="{{ url_for('index') }}">Inicio</a>
+            <a class="footer__enlace" href="{{ url_for('nosotros') }}">Nosotros</a>
+            <a class="footer__enlace" href="{{ url_for('proceso') }}">Proceso</a>
+            <a class="footer__enlace" href="{{ url_for('tienda') }}">Tienda</a>
+            <a class="footer__enlace" href="{{ url_for('carrito') }}">Carrito</a>
+        </nav>
+
+        <p class="footer__copyright">Todos los derechos reservados © MacroTix</p>
+    </div>
+</footer>
+
+</body>
+</html>

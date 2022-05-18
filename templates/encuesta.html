@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Juan Trading: Encuesta</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .star-widget input{
+            display: none;
+        }
+        .star-widget label{
+            font-size: 40px;
+            color: #444;
+            margin-bottom: 20px;
+            padding: 10px;
+            float: left;
+            transition: all 0.2 ease;
+        }
+
+        input:not(:checked) label:hover,
+        input:not(:checked) label:hover label{
+            color:#fd4;
+        }
+        input::checked label{
+            color:#fd4
+        }
+
+        input#rate-5:checked label{
+            color:#fe7;
+            text-shadow: 0 0 20px #952;
+        }
+
+        input:checked form{
+            display: block;
+        }
+
+
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body class="background__registro">
+
+    <section class="fomulario__registro">
+        <h4>Califica tu experiencia de compra</h4>
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-5" />
+                <label for="rate-5" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-4" />
+                <label for="rate-4" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-3" />
+                <label for="rate-3" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-2" />
+                <label for="rate-2" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-1" />
+                <label for="rate-1" class="fas fa-star"></label>
+        </div>
+        <input class="controls" type="text" name="nombres" id="nombres" placeholder="Crítica tu proceso de compra">
+        <a href="#index.html"><input class="botons" type="submit" value="Enviar Opinión"></a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__contenedor footer__contenido">
+            <nav class="footer__nav">
+                <a class="footer__enlace" href="index.html">Inicio</a>
+                <a class="footer__enlace" href="nosotros.html">Nosotros</a>
+                <a class="footer__enlace" href="blog.html">Proceso</a>
+                <a class="footer__enlace" href="tienda.html">Tienda</a>
+                <a class="footer__enlace" href="carrito.html">Carrito</a>
+            </nav>
+
+            <p class="footer__copyright">Todos los derechos reservados © MacroTix</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

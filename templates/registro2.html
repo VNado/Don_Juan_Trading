@@ -1,0 +1,21 @@
+{% extends 'layout3.html' %}
+{% block title %}
+    <title>Don Juan Trading: Registro(Paso 2)</title>
+{% endblock %}
+{% block body %}
+<body class="background__registro">
+
+    <section class="fomulario__registro">
+        <h5>Paso 2 de 3</h5>
+        <h4>Crear una cuenta</h4>
+        <h6>Datos de envío</h6>
+        <input class="controls" type="text" name="nombres" id="nombres" placeholder="Calle y Número">
+        <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Colonia">
+        <input class="controls" type="email" name="correo" id="correo" placeholder="Código postal">
+        <input class="controls" type="password" name="correo" id="correo" placeholder="Estado/Provincia/Región">
+        <input class="controls" type="password" name="correo" id="correo" placeholder="Ciudad">
+        <input class="controls" type="password" name="correo" id="correo" placeholder="Número de teléfono">
+        <a href="{{ url_for('registro3') }}"><input class="botons" type="submit" value="Siguente"></a>
+        <p><a href="#">¿Ya tengo Cuenta?</a></p>
+    </section>
+{% endblock %}
