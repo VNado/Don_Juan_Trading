@@ -108,12 +108,15 @@ img {
     gap: 2rem;
     margin-top: 5rem;
     position: relative;
-    z-index: 1;
+    z-index: 1;    
 }
 
 @media (min-width: 768px) {
     .navegacion {
         margin-top: 0;
+        justify-content: flex-end;
+        float: right;
+        flex-direction: row;
     }
 }
 
@@ -522,5 +525,19 @@ img {
     .nosotros__grid {
         grid-template-columns: repeat(2, 1fr);
         align-items: center;
+    }
+}
+.toggle_button .bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+}
+@media (max-width: 400px) {
+    .toggle_button {
+        display: flex;
+    }
+    .navbar-links {
+        display: none;
     }
 }

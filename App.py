@@ -4,11 +4,11 @@ from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 # MySQL configurations
-#app.config['MYSQL_HOST'] = 'localhost'
-#app.config['MYSQL_USER'] = 'root'
-#app.config['MYSQL_PASSWORD'] = 'toor'
-#app.config['MYSQL_DB'] = 'prueba'
-#mysql = MySQL(app)
+app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
+app.config['MYSQL_DB'] = 'DonJuanTrading'
+mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
 
@@ -34,7 +34,10 @@ def tienda():
 
 @app.route('/carrito')
 def carrito():
-    return render_template('carrito.html')
+    cur = mysql.connection.cursor()
+    cur.execute("select producto.imagen, producto.nombre_prod, inventario.precio_vent, pedido.fecha_env from producto, inventario, pedido where pedido.id_cliente ="+"1;")
+    data = cur.fetchall()
+    return render_template('carrito.html', registros=data)
 
 @app.route('/iniciodesesion')
 def iniciodesesion():

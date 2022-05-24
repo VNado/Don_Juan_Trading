@@ -4,6 +4,16 @@
 {% endblock %}
 {% block main %}
     <main class="contenedor"><!--funcionalidad python-->
-        {print('aaaaa')}
+        {% for registros in registros %}
+            <tr>
+                <td>{{ registros.0 }}</td>
+                <td>{{ registros.1 }}</td>
+                <td>{{ registros.2 }}</td>
+                <td>{{ registros.3 }}</td>
+                <td>
+                    <a href="/editar/{{ registros.0 }}">Editar</a>
+                    <a href="/eliminar/{{ registros.0 }}">Eliminar</a>
+            </tr>
+        {% endfor %}
     </main>
 {% endblock %}
