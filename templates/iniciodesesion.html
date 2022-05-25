@@ -8,9 +8,16 @@
 
     <section class="fomulario__registro">
         <h4>Inicio de Sesión</h4>
+
+    <form action="/" method="post">
         <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+        <input class="controls" type="password" name="contrasena" id="contrasena" placeholder="Ingrese su Contraseña">
+        <input class="botons" type="submit" value="Accede a tu cuenta">
+    </form>
+
+        <!--<input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
         <input class="controls" type="password" name="correo" id="correo" placeholder="Ingrese su Contraseña">
-        <a href="#index.html"><input class="botons" type="submit" value="Iniciar Sesión"></a><!--funcionalidad python-->
+        <a href="#index.html"><input class="botons" type="submit" value="Iniciar Sesión"></a>--><!--funcionalidad python-->
         <p><a href="{{ url_for('registro1') }}">¿Aún no tienes una cuenta?</a></p>
     </section>
 {% endblock %}

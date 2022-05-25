@@ -8,13 +8,17 @@
     <section class="fomulario__registro">
         <h5>Paso 1 de 3</h5>
         <h4>Crear una cuenta</h4>
-        <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre">
-        <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido">
-        <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
-        <input class="controls" type="password" name="correo" id="correo" placeholder="Ingrese su Contraseña">
-        <input class="controls" type="password" name="correo" id="correo" placeholder="Confirme su Contraseña">
+
+        <form action="/registro/paso2" method="post">
+            <input class="controls" type="text" name="nombre" id="nombres" placeholder="Ingrese su Nombre">
+            <input class="controls" type="text" name="apellido" id="apellidos" placeholder="Ingrese su Apellido">
+            <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+            <input class="controls" type="password" name="correo" id="correo" placeholder="Ingrese su Contraseña">
+            <input class="controls" type="password" name="contrasena" id="passwd" placeholder="Confirme su Contraseña">
+            <button class="botons" type="submit" value="Siguente">Siguiente</button>
+        </form>
         <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-        <a href="{{ url_for('registro2') }}"><input class="botons" type="submit" value="Siguente"></a>
+        <!--<a href="{{ url_for('registro2') }}"><input class="botons" type="submit" value="Siguente"></a>-->
         <p><a href="#">¿Ya tengo Cuenta?</a></p>
     </section>
 {% endblock %}

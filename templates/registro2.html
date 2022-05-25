@@ -9,13 +9,24 @@
         <h5>Paso 2 de 3</h5>
         <h4>Crear una cuenta</h4>
         <h6>Datos de envío</h6>
-        <input class="controls" type="text" name="nombres" id="nombres" placeholder="Calle y Número">
-        <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Colonia">
-        <input class="controls" type="email" name="correo" id="correo" placeholder="Código postal">
+
+        <form action="/registro/finalizado" method="post">
+            <input class="controls" type="text" name="calle_num" id="calle_num" placeholder="Calle y Número">
+            <input class="controls" type="text" name="colonia" id="colonia" placeholder="Colonia">
+            <input class="controls" type="number" name="c_p" id="c_p" placeholder="Código postal">
+            <!--<input class="controls" type="password" name="correo" id="correo" placeholder="Estado/Provincia/Región">-->
+            <input class="controls" type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
+            <input class="controls" type="number" name="telefono" id="telefono" placeholder="Número de teléfono">
+            <button class="botons" type="submit" value="Siguente">Siguiente</button>
+        </form>
+
+        <!--<input class="controls" type="text" name="calle_num" id="calle_num" placeholder="Calle y Número">
+        <input class="controls" type="text" name="colonia" id="colonia" placeholder="Colonia">
+        <input class="controls" type="number" name="c_p" id="c_p" placeholder="Código postal">
         <input class="controls" type="password" name="correo" id="correo" placeholder="Estado/Provincia/Región">
-        <input class="controls" type="password" name="correo" id="correo" placeholder="Ciudad">
-        <input class="controls" type="password" name="correo" id="correo" placeholder="Número de teléfono">
-        <a href="{{ url_for('registro3') }}"><input class="botons" type="submit" value="Siguente"></a>
+        <input class="controls" type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
+        <input class="controls" type="number" name="telefono" id="telefono" placeholder="Número de teléfono">-->
+        <!--<a href="{{ url_for('index') }}"><input class="botons" type="submit" value="Siguente"></a>-->
         <p><a href="#">¿Ya tengo Cuenta?</a></p>
     </section>
 {% endblock %}

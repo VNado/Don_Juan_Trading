@@ -1,5 +1,7 @@
 import email
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from mysqlx import Row
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -11,14 +13,49 @@ app.config['MYSQL_DB'] = 'DonJuanTrading'
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
+# App variables
+nombre = ""
+apellido = ""
+correo = ""
+contrasena = ""
+calle_num = ""
+colonia = ""
+c_p = ""
+ciudad = ""
+telefono = ""
+
 
 #APP ROUTES
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    #cur = mysql.connection.cursor()
-    #cur.execute("SELECT * FROM registro")
-    #data = cur.fetchall()
-    return render_template('index.html')#, registros=data#)
+    if request.method == 'POST':
+        correo = request.form['correo']
+        contrasena_plana = request.form['contrasena']
+        print(contrasena_plana)
+        cur=mysql.connection.cursor()
+        cur.execute("SELECT contrasena FROM cliente WHERE correo = %s", [correo])
+        if cur.rowcount == 0:
+            flash('Correo no registrado', 'danger')
+            return redirect(url_for('index'))
+        else:
+            cur=mysql.connection.cursor()
+            cur.execute("SELECT contrasena FROM cliente WHERE correo = %s", [correo])
+            user = cur.fetchone()
+            print(user[0])
+            respuesta_contra = check_password_hash(user[0], contrasena_plana)
+            if respuesta_contra == False:
+                flash('Contraseña incorrecta', 'danger')
+                return redirect(url_for('index'))
+            else:
+                cur = mysql.connection.cursor()
+                cur.execute("select id_cliente from cliente where correo = '"+correo+"';")
+                id_cliente = cur.fetchone()
+                session['user'] = id_cliente[0]
+                print(id_cliente[0])
+                return redirect(url_for('index'))
+    else:
+        return render_template('index.html')
+    
 
 @app.route('/nosotros')
 def nosotros():
@@ -42,23 +79,58 @@ def carrito():
 @app.route('/iniciodesesion')
 def iniciodesesion():
     return render_template('iniciodesesion.html')
+@app.route('/cerrar_sesion')
+def cerrar_sesion():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/entrada/<string:ira>')
 def entrada(ira):
     return render_template('entrada.html', ira=ira)
 
+#REGISTRO
 @app.route('/registro')
 def registro1():
     return render_template('registro1.html')
-@app.route('/registro/paso2')
+@app.route('/registro/paso2' , methods=['POST'])
 def registro2():
+    if request.method == 'POST':
+        #Extraccion de datos
+        global nombre
+        global apellido
+        global correo
+        global contrasena
+
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        correo = request.form['correo']
+        contrasena = request.form['contrasena']
+        #Encriptacion de contrasena
+        contrasena = generate_password_hash(contrasena)
     return render_template('registro2.html')
-@app.route('/registro/paso3')
-def registro3():
-    return render_template('registro3.html')
-@app.route('/registro/finalizado')
+#@app.route('/registro/paso3')
+#def registro3():
+    #return render_template('registro3.html')
+@app.route('/registro/finalizado', methods=['POST'])
 def registro4():
+    if request.method == 'POST':
+        #Extraccion de datos
+        global nombre 
+        global apellido
+        global correo
+        global contrasena
+
+        calle_num = request.form['calle_num']
+        colonia = request.form['colonia']
+        c_p = request.form['c_p']
+        ciudad = request.form['ciudad']
+        telefono = request.form['telefono']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO cliente(nombre, apellido, correo, contrasena, calle_num, colonia, c_p, ciudad, telefono) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (nombre, apellido, correo, contrasena, calle_num, colonia, c_p, ciudad, telefono))
+        mysql.connection.commit()
+        flash('Registro exitoso!')
     return render_template('registro4.html')
+#Fin de registro
 
 @app.route('/sangre_indio')
 def producto1():
