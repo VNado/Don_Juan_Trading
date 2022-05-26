@@ -46,29 +46,30 @@
   }
 
   .nav-links {
-    position: fixed;
+    position: absolute;
     background: #131313 ;
-    height: 200vh;
-    width: 100%;
-    transform: translate(-5%, -4%);
+    height: 60vh;
+    width: 50vh;
+    transform: translate(-15%, -23%);
     flex-direction: column;
-    clip-path: circle(10000px at 90% -10%);
-    -webkit-clip-path: circle(100px at 90% -10%);
+    clip-path: circle(1px at 90% -26%);
+    -webkit-clip-path: circle(1px at 90% -26%);
     transition: all 1s ease-out;
     pointer-events: none;
   }
   .nav-links.open {
-    clip-path: circle(100px at 90% -10%);
-    -webkit-clip-path: circle(1000px at 90% -10%);
+    clip-path: circle(1px at 90% -26%);
+    -webkit-clip-path: circle(1000px at 90% -26%);
     pointer-events: all;
 
   }
   .nav-links li a {
+    position: fixed;
     font-size: 1.4rem;
-    padding: 1rem 5rem;
+    padding: 1rem  5rem;
     border: 2px solid var(--primary);
     color: var(--blanco);
     text-transform: uppercase;
-
+    margin: 20px;
   }
 }

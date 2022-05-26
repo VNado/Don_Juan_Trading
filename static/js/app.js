@@ -1,12 +1,12 @@
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
 const links = document.querySelectorAll(".nav-links li");
-var puntor=0;
+//var puntor=0;
 
 hamburger.addEventListener("click", () => {
   navLinks.classList.toggle("open");
-  puntor++;
-  condicional();
+  //puntor++;
+  //condicional();
 });
 
 function condicional(){

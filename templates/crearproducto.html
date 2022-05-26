@@ -1,0 +1,33 @@
+{% extends 'layout3.html' %}
+{% block title %}
+    <title>Don Juan Trading: Registro</title>
+{% endblock %}
+{% block body %}
+<body class="background__registro">
+
+    <section class="fomulario__registro">
+        <h5>Paso 1 de 3</h5>
+        <h4>Crear una cuenta</h4>
+
+        <form action="/crearproducto/finalizado" method="post" id="form1">
+            <input class="controls" type="text" name="nombre_prod" id="nombre_prod" placeholder="nombre_prod" required>
+            <input class="controls" type="text" name="descripcion" id="descripcion" placeholder="descripcion" required>
+            <input class="controls" type="number" name="precio" id="precio" placeholder="precio" required>
+            <button class="botons" type="submit">Siguiente</button>
+        </form>
+        <!--en caso de messages-->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
+        <!--<a href="{{ url_for('registro2') }}"><input class="botons" type="submit" value="Siguente"></a>-->
+        <p><a href="#">¿Ya tengo Cuenta?</a></p>
+    </section>
+    <script src="{{ url_for('static', filename='js/registro.js') }}"></script>
+{% endblock %}

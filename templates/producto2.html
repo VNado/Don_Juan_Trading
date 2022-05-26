@@ -8,10 +8,10 @@
             <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_02.png') }}" alt="imagen mezcal">
 
             <div class="producto__contenido">
-                <h3 class="producto__nombre">Fantasma</h3>
-                <p class="producto__descripcion">Dulce y rudo a la imaginación por su contenido en alcohol. Mezcal fantasma porque en él, no se percibe su alcohol sino su sabor avainillado, para paladares sabios que lo toman directo sin mezclar. Inimaginable para algunos, resulta ser un poco más suave gracias a su proceso artesanal.</p>
+                <h3 class="producto__nombre">{{ registros[1] }}</h3>
+                <p class="producto__descripcion">{{ registros[2] }}</p>
                 <p class="producto__descripcion">Mezcal con ligeros aromas frutales y leves notas a quiote. Sabor muy dulce al degustar, al pasarlo lentamente desde la punta de los dientes atravesando toda la lengua hasta el final de nuestra boca, se presentan delicados sabores de agave dulce cocido y notas ahumadas. Retrogusto ligeramente a vainilla y a frutos verdes.</p>
-                <p class="producto__precio">$299</p>
+                <p class="producto__precio">${{ registros[5] }}</p>
 
                 <form class="producto__formulario">
                     <label class="producto__label">Cantidad:</label>

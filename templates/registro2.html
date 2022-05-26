@@ -11,15 +11,24 @@
         <h6>Datos de envío</h6>
 
         <form action="/registro/finalizado" method="post">
-            <input class="controls" type="text" name="calle_num" id="calle_num" placeholder="Calle y Número">
-            <input class="controls" type="text" name="colonia" id="colonia" placeholder="Colonia">
-            <input class="controls" type="number" name="c_p" id="c_p" placeholder="Código postal">
+            <input class="controls" type="text" name="calle_num" id="calle_num" placeholder="Calle y Número" required>
+            <input class="controls" type="text" name="colonia" id="colonia" placeholder="Colonia" required>
+            <input class="controls" type="number" name="c_p" id="c_p" placeholder="Código postal" required>
             <!--<input class="controls" type="password" name="correo" id="correo" placeholder="Estado/Provincia/Región">-->
-            <input class="controls" type="text" name="ciudad" id="ciudad" placeholder="Ciudad">
-            <input class="controls" type="number" name="telefono" id="telefono" placeholder="Número de teléfono">
-            <button class="botons" type="submit" value="Siguente">Siguiente</button>
+            <input class="controls" type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required>
+            <input class="controls" type="number" name="telefono" id="telefono" placeholder="Número de teléfono" required>
+            <button class="botons" type="submit" value="Siguente" onclick="validarTelefono()">Siguiente</button>
         </form>
-
+        <!--en caso de messages-->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <!--<input class="controls" type="text" name="calle_num" id="calle_num" placeholder="Calle y Número">
         <input class="controls" type="text" name="colonia" id="colonia" placeholder="Colonia">
         <input class="controls" type="number" name="c_p" id="c_p" placeholder="Código postal">
@@ -29,4 +38,5 @@
         <!--<a href="{{ url_for('index') }}"><input class="botons" type="submit" value="Siguente"></a>-->
         <p><a href="#">¿Ya tengo Cuenta?</a></p>
     </section>
+    <script src="{{ url_for('static', filename='js/registro.js') }}"></script>c
 {% endblock %}

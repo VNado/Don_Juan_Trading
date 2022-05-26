@@ -8,10 +8,10 @@
             <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_03.png') }}" alt="imagen mezcal">
 
             <div class="producto__contenido">
-                <h3 class="producto__nombre">Plata</h3>
-                <p class="producto__descripcion">Suave,  refinado, avainillado y  muy sutil al paladar. Por su baja graduación en alcohol y su delicadez, es apto para aquellas personas que degustaran el Mezcal por primera vez. Es ligero en aromas y sabores, el mezcla ideal para la elaboración de cócteles, originando un sabor exquisito de alta calidad, versátil para crear bebidas.</p>
+                <h3 class="producto__nombre">{{ registros[1] }}</h3>
+                <p class="producto__descripcion">{{ registros[2] }}</p>
                 <p class="producto__descripcion">Sabor fresco, dulce aroma avainillado, con leves notas a manzana verde. Presenta ligeros aromas de agave cocido, madera, y humo. Retrogusto suave, dulce, terminado con un buen fin de boca ligero a madera, agave y peron.</p>
-                <p class="producto__precio">$799</p>
+                <p class="producto__precio">${{ registros[5] }}</p>
 
                 <form class="producto__formulario">
                     <label class="producto__label">Cantidad:</label>
