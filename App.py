@@ -7,10 +7,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 # MySQL configurations
-app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = ''
+app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
+app.config['MYSQL_DB'] = 'DonJuanTrading'
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
@@ -71,7 +71,11 @@ def proceso():
 
 @app.route('/tienda')
 def tienda():
-    return render_template('tienda.html')
+    #consultar productos
+    cur = mysql.connection.cursor()
+    cur.execute("select * from producto")
+    prod = cur.fetchall()
+    return render_template('tienda.html', productos=prod)
 
 @app.route('/carrito')
 def carrito():
@@ -227,7 +231,7 @@ def crearproducto2():
     #crear html
     ##User.crear_html()
     return render_template('listo.html')
-@app.route('/producto/<string:prod>/')
+@app.route('/producto/<string:prod>')
 def producto(prod):
     #consulta para informacion del producto
     cur = mysql.connection.cursor()
