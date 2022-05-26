@@ -7,10 +7,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 # MySQL configurations
-app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_HOST'] = ''
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
-app.config['MYSQL_DB'] = 'DonJuanTrading'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = ''
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
