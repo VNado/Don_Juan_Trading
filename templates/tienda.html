@@ -8,7 +8,19 @@
 
         <div class="productos__grid">
 
-            <div class="producto">
+            {% for productos in productos %}
+                <div class="producto">
+                    <img class="producto__imagen" src="{{ url_for('static', filename='img/'+productos.6+'') }}" alt="imagen mezcal">
+                    <div class="producto__contenido">
+                        <h3 class="producto__nombre">{{ productos.1 }}</h3>
+                        <p class="producto__descripcion">Pendiente :c</p>
+                        <p class="producto__precio">{{ productos.5 }}</p>
+                        <a class="producto__enlace" href="/producto/{{ productos.1 }}">Ver Producto</a>
+                    </div><!--./producto-->
+                </div>
+            {% endfor %}
+
+            <!--<div class="producto">
                 <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_01.png') }}" alt="imagen mezcal">
 
                 <div class="producto__contenido">
@@ -17,9 +29,9 @@
                     <p class="producto__precio">$499</p>
                     <a class="producto__enlace" href="{{ url_for('producto1') }}">Ver Producto</a>
                 </div>
-            </div><!--./producto-->
+            </div>--><!--./producto-->
 
-            <div class="producto">
+            <!--<div class="producto">
                 <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_02.png') }}" alt="imagen mezcal">
 
                 <div class="producto__contenido">
@@ -28,9 +40,9 @@
                     <p class="producto__precio">$299</p>
                     <a class="producto__enlace" href="{{ url_for('producto2') }}">Ver Producto</a>
                 </div>
-            </div><!--./producto-->
+            </div>--><!--./producto-->
 
-            <div class="producto">
+            <!--<div class="producto">
                 <img class="producto__imagen" src="{{ url_for('static', filename='img/mezcal_03.png') }}" alt="imagen mezcal">
 
                 <div class="producto__contenido">
@@ -39,7 +51,7 @@
                     <p class="producto__precio">$799</p>
                     <a class="producto__enlace" href="{{ url_for('producto3') }}">Ver Producto</a>
                 </div>
-            </div><!--./producto-->
+            </div>--><!--./producto-->
 
         </div><!--./productos__grid-->
     </main>
