@@ -12,10 +12,10 @@
                 <p class="producto__descripcion">{{ registros[2] }}</p>
                 <p class="producto__precio">${{ registros[5] }}</p>
 
-                <form class="producto__formulario">
+                <form class="producto__formulario" action="/carrito/agregar" method="post">
                     <label class="producto__label">Cantidad:</label>
                     <p></p>
-                    <select class="producto__cantidad">
+                    <select class="producto__cantidad" name="cantidad">
                         <option value="">-- Seleccione --</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -29,11 +29,18 @@
                         <option value="10">10</option>
                     </select>
 
+                    <input type="hidden" name="id_prod" value="{{ registros[0] }}">
+
+                    {% if 'user' in session %}
                     <input
                         type="submit"
                         class="producto__agregar-carrito"
                         value="Agregar al Carrito"
                     >
+                    {% else %}
+                        <a href="{{ url_for('iniciodesesion') }}" class="producto__agregar-carrito">Para agragar al carrito. Inicie Sesion</a>
+                    {% endif %}
+                    
                 </form>
             </div>
         </div><!--./producto-->

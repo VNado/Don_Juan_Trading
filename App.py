@@ -1,19 +1,23 @@
 import email
+from fileinput import filename
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from mysqlx import Row
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from flask_mysqldb import MySQL
 from datetime import datetime
 
 app = Flask(__name__)
 # MySQL configurations
-app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = ''
+app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
+app.config['MYSQL_DB'] = 'DonJuanTrading'
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
+app.config['UPLOAD_FOLDER'] = 'static/img'
 # App variables
 nombre = ""
 apellido = ""
@@ -79,10 +83,32 @@ def tienda():
 
 @app.route('/carrito')
 def carrito():
+    #hacer consulta de productos en carrito respecto al id del cliente
     cur = mysql.connection.cursor()
-    cur.execute("select producto.imagen, producto.nombre_prod, inventario.precio_vent, pedido.fecha_env from producto, inventario, pedido where pedido.id_cliente ="+"1;")
-    data = cur.fetchall()
-    return render_template('carrito.html', registros=data)
+    cur.execute("select nombre_prod, cantidad, precio, total from carrito_temp where id_cliente = "+str(session['user']))
+    carrito = cur.fetchall()
+    # si no hay productos en el carrito
+    if len(carrito) == 0:
+        mensages = "No hay productos en el carrito"
+        return render_template('carrito.html', mensage=mensages)
+    return render_template('carrito.html', registros=carrito, mensaje='')
+@app.route('/carrito/agregar', methods=['GET', 'POST'])
+def agregar_carrito():
+    if request.method == 'POST':
+        cantidad = request.form['cantidad']
+        id_prod = request.form['id_prod']
+        cur = mysql.connection.cursor()
+        cur.execute("select nombre_prod, precio from producto where id_prod = "+id_prod)
+        precio = cur.fetchone()
+        nombre_prod = precio[0]
+        precio = precio[1]
+        precio = float(precio)
+        total = precio * int(cantidad)
+        cur.execute("insert into carrito_temp (id_cliente, id_producto, nombre_prod, cantidad, precio, total) values ("+str(session['user'])+", "+id_prod+", '"+nombre_prod+"', "+cantidad+", "+str(precio)+", "+str(total)+")")
+        mysql.connection.commit()
+        return redirect(url_for('carrito'))
+    else:
+        return redirect(url_for('carrito'))
 
 @app.route('/iniciodesesion')
 def iniciodesesion():
@@ -210,6 +236,9 @@ def crearproducto2():
         nombre_prod = request.form['nombre_prod']
         descripcion = request.form['descripcion']
         precio_compra = request.form['precio']
+        f = request.files['imagen']
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #verificar precio
         if precio_compra == "":
             flash('El precio de venta no puede ser menor al de compra', 'danger')
@@ -224,10 +253,12 @@ def crearproducto2():
             return redirect(url_for('crearproducto'))
         #se insertan los datos en la base de datos
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO producto(nombre_prod, descripcion, precio) VALUES (%s, %s, %s)", (nombre_prod, descripcion, precio_compra))
+        cur.execute("INSERT INTO producto(nombre_prod, descripcion, precio, imagen) VALUES (%s, %s, %s, %s)", (nombre_prod, descripcion, precio_compra, filename))
         mysql.connection.commit()
         #se avisa que se registro correctamente
         flash('Producto creado exitosamente!', 'success')
+        #limpiar flash
+        session.pop('_flashes', None)
     #crear html
     ##User.crear_html()
     return render_template('listo.html')

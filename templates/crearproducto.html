@@ -9,10 +9,11 @@
         <h5>Paso 1 de 3</h5>
         <h4>Crear una cuenta</h4>
 
-        <form action="/crearproducto/finalizado" method="post" id="form1">
+        <form action="/crearproducto/finalizado" method="post" enctype="multipart/form-data">
             <input class="controls" type="text" name="nombre_prod" id="nombre_prod" placeholder="nombre_prod" required>
             <input class="controls" type="text" name="descripcion" id="descripcion" placeholder="descripcion" required>
             <input class="controls" type="number" name="precio" id="precio" placeholder="precio" required>
+            <input class="controls" type="file" name="imagen" id="imagen" required>
             <button class="botons" type="submit">Siguiente</button>
         </form>
         <!--en caso de messages-->

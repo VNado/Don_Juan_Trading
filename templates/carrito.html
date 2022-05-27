@@ -4,16 +4,48 @@
 {% endblock %}
 {% block main %}
     <main class="contenedor"><!--funcionalidad python-->
-        {% for registros in registros %}
-            <tr>
-                <td>{{ registros.0 }}</td>
-                <td>{{ registros.1 }}</td>
-                <td>{{ registros.2 }}</td>
-                <td>{{ registros.3 }}</td>
-                <td>
-                    <a href="/editar/{{ registros.0 }}">Editar</a>
-                    <a href="/eliminar/{{ registros.0 }}">Eliminar</a>
-            </tr>
-        {% endfor %}
+        
+        
+        {% if mensage == '' %}
+        <div class="alert alert-success">
+            {{ mensage }}
+            <a href="{{ url_for('tienda') }}">¿Desea agregar alguno?</a>
+        </div>
+        {% else %}
+        
+        <!--Dibujar tabla de carrito-->
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cntidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th>Eliminar</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registros in registros %}
+                    <tr>
+                        <td>{{ registros.0 }}</td>
+                        <td>{{ registros.1 }}</td>
+                        <td>{{ registros.2 }}</td>
+                        <td>{{ registros.3 }}</td>
+                        <td>
+                            <a href="/eliminar/{{ registros.0 }}" class="">
+                                <i class="fa fa-trash">Eliminar</i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/editar/{{ registros.0 }}" class="">
+                                <i class="fa fa-pencil">Editar</i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        
     </main>
 {% endblock %}
