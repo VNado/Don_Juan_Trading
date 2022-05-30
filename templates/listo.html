@@ -1,12 +1,12 @@
 {% extends 'layout3.html' %}
 {% block title %}
-    <title>Don Juan Trading: Registro Finalizado</title>
+    <title>Don Juan Trading: Pedido Realizado</title>
 {% endblock %}
 {% block body %}
 <body class="background__registro">
 
     <section class="fomulario__registro">
-        <h4>Registro finalizado</h4>
-        <a href="{{ url_for('iniciodesesion') }}"><input class="botons" type="submit" value="Accede a tu cuenta"></a>
+        <h4>¡Pedido Realizado!</h4>
+        <a href="{{ url_for('index') }}"><input class="botons" type="submit" value="Ver pedido"></a>
     </section>
 {% endblock %}

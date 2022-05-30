@@ -73,3 +73,80 @@
     margin: 20px;
   }
 }
+/* tabla de carrito */
+.tablaa {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  background: none;
+}
+
+table tr{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #ddd;
+  border: 1px solid;
+}
+table tr th{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  text-transform: uppercase;
+  background-color: #B09700;
+  border: 10px solid #B09700;
+}
+table tr td{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #262626;
+}
+table tr td a{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #262626;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+table tr td a:hover{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #B09700;
+}
+.total p{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #262626;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.total p:hover{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #B09700;
+}
+.boton{
+  text-align: left;
+  padding-bottom: 15px;
+  color: #FFF;
+  background-color: #262626;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+/*Botones de paypal*/
+.paypal1 {color: #003087; font-size: 22px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-style: italic;}
+.paypal2 {color: #009CDE; font-size: 22px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-style: italic;}
+.paypal3 {color: #000000; font-size: 17px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+.paypal4 {color: #fafafa; font-size: 17px; font-family: Arial, Helvetica, sans-serif; }
+.myButton0a {width: 250px; background-color:#FFC439; border-radius:4px; display:inline-block; cursor:pointer; padding:12px; text-align:center; text-decoration:none; margin-bottom: 5px; }
+.myButton0a:hover {background-color:#fcba1f; }
+.myButton0a:active {position:relative; top:1px; }
+.myButton1a {width: 250px; background-color:#000000; border-radius:4px; display:inline-block; cursor:pointer; padding:12px; text-align:center; text-decoration:none; }
+.myButton1a:hover {background-color:#2b2b2b; }
+.myButton1a:active {position:relative; top:1px; }
