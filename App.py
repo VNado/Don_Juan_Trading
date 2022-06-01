@@ -11,10 +11,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 # MySQL configurations
-app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = ''
+app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
+app.config['MYSQL_DB'] = 'DonJuanTrading'
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
@@ -387,10 +387,10 @@ def ver_pedidos():
     #Ejeuta consulta para obtener los pedidos
     cur = mysql.connection.cursor()
     cur.execute("""SELECT producto.imagen, producto.nombre_prod, producto.precio, ventas_realizadas.cantidad_de_producto, ventas_realizadas.total_de_venta, ventas_realizadas.estado_de_venta FROM producto, ventas_realizadas
-    WHERE producto.id_prod = ventas_realizadas.id_prod AND ventas_realizadas.id_cliente = %s;""", (str(session['user'])))
+    WHERE producto.id_prod = ventas_realizadas.id_prod AND ventas_realizadas.id_cliente = %s;""", ([str(session['user'])]))
     data = cur.fetchall()
     #Ejecutar la siguiente consulta para obtener la direccion del cliente
-    cur.execute("""SELECT concat_ws(' ', calle_num, colonia, c_p, ciudad) as Direccion FROM cliente WHERE id_cliente= %s;""", (str(session['user'])))
+    cur.execute("""SELECT concat_ws(' ', calle_num, colonia, c_p, ciudad) as Direccion FROM cliente WHERE id_cliente= %s;""", ([str(session['user'])]))
     data2 = cur.fetchone()
     return render_template('ver_pedidos.html', registros=data, registros2=data2)
 
