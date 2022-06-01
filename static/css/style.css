@@ -4,6 +4,7 @@
   margin-top: 5rem;
   position: relative;
   z-index: 1;
+  list-style: none;
 }
 
 @media (min-width: 768px) {
@@ -81,55 +82,96 @@
   align-items: center;
   margin-top: 5rem;
   background: none;
+  border: none;
+  padding: 20px;
 }
 
 table tr{
   text-align: left;
   padding-bottom: 15px;
   color: #ddd;
-  border: 1px solid;
+  width: 100%;
 }
+
 table tr th{
   text-align: left;
-  padding-bottom: 15px;
-  color: #FFF;
+  color: #B09700;
   text-transform: uppercase;
-  background-color: #B09700;
-  border: 10px solid #B09700;
+  padding: 30px;
 }
+
+/*
+tr:hover td{
+background-color: #B09700;
+}
+*/
+
 table tr td{
   text-align: left;
-  padding-bottom: 15px;
+  padding: 20px;
   color: #FFF;
-  background-color: #262626;
 }
-table tr td a{
+.editarproducto{
+  border-radius: 5px;
   text-align: left;
-  padding-bottom: 15px;
+  padding: 15px;
   color: #FFF;
   background-color: #262626;
   text-transform: uppercase;
   text-decoration: none;
+  font-size: small;
 }
-table tr td a:hover{
+
+.eliminarproducto{
+  border-radius: 5px;
   text-align: left;
-  padding-bottom: 15px;
+  padding: 15px;
   color: #FFF;
-  background-color: #B09700;
+  background-color: #262626;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: small;
 }
+
+
+.editarproducto:hover{
+  transition: .3s;
+  border-radius: 5px;
+  text-align: left;
+  padding:20px;
+  color: #FFF;
+  background-color: #108800;
+}
+
+.eliminarproducto:hover{
+  transition: .3s;
+  border-radius: 5px;
+  text-align: left;
+  padding:20px;
+  color: #FFF;
+  background-color: #8b0202;
+}
+
+
 .total p{
+  border-radius: 5px;
   text-align: left;
-  padding-bottom: 15px;
+  padding: 15px;
   color: #FFF;
-  background-color: #262626;
+  border: 1px #B09700 solid;
   text-transform: uppercase;
   text-decoration: none;
+  font-size: small;
 }
+
 .total p:hover{
+  transition: .3s;
+  border-radius: 5px;
   text-align: left;
-  padding-bottom: 15px;
+  padding: 15px;
   color: #FFF;
   background-color: #B09700;
+  font-size: small;
 }
 .boton{
   text-align: left;
@@ -139,6 +181,7 @@ table tr td a:hover{
   text-transform: uppercase;
   text-decoration: none;
 }
+
 /*Botones de paypal*/
 .paypal1 {color: #003087; font-size: 22px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-style: italic;}
 .paypal2 {color: #009CDE; font-size: 22px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-style: italic;}

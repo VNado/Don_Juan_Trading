@@ -247,137 +247,61 @@ def registroEnvio():
     return render_template('registroEnvio.html', totali=subtotal)
 @app.route('/finalizar_compra/PagoFinalizado', methods=['POST', 'GET'])
 def PagoFinalizado():
-    # ---Insertar datos en venta---
-    #obtener infocacion del carrito
+    #La base va a ser el carrito temporal
+    #Obtneer cuantos productos tiene el cliente
     cur = mysql.connection.cursor()
-    cur.execute("SELECT id_producto, cantidad, precio FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    #igualar el resultado a una variabla
-    registros = cur.fetchall()
-    #Obtener Solo la fecha actual
-    now = datetime.now()
-    #obtener el telefono del cliente
-    cur.execute("SELECT telefono FROM cliente WHERE id_cliente = %s", [session['user']])
-    #igualar el resultadoi a una variable 
-    telefono = cur.fetchone()
-    telefono = telefono[0]
-    #insertar valores a tabla venta (ciclo for)
-    for registro in registros:
-        cur.execute("INSERT INTO venta(id_cliente, id_prod, fecha_vent, telefono) VALUES (%s, %s, %s, %s)", (session['user'], registro[0], now.date(), telefono))
-        mysql.connection.commit()
-    # ---Insertar datos en envios---
-    #obtener datos de la tabla cliente
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT calle_num, ciudad, colonia, c_p, nombre  FROM cliente WHERE id_cliente = %s", [session['user']])
-    #Meter los resultados en una variable
-    registros = cur.fetchall()
-    #obtener id_venta de la tabla venta
-    cur.execute("SELECT id_venta FROM venta WHERE id_cliente = %s", [session['user']])
-    #meter los resultados en una variable
-    id_venta = cur.fetchall()
-    #verificar la cantidad de veces que se repite el id_venta en venta
-    cur.execute("SELECT COUNT(id_venta) FROM venta WHERE id_cliente = %s", [session['user']])
+    cur.execute("SELECT count(*) FROM carrito_temp WHERE id_cliente = "+str(session['user'])+";")
     cantidad = cur.fetchone()
     cantidad = cantidad[0]
-    cantidad_comodin = cantidad
-    print(cantidad)
-    #insertar valores a la tabla envios
-    a = 0
-    while cantidad > 0:
-        i = 0
-        cur.execute("""INSERT INTO envios(calle_num, ciudad, direccion, c_p, nombre, id_venta)
-        VALUES (%s, %s, %s, %s, %s, %s)""", (registros[i][0], registros[i][1], registros[i][2], registros[i][3], registros[i][4], id_venta[a][0]))
-        mysql.connection.commit()
-        cantidad = cantidad - 1
-        i = i + 1
-        a = a + 1
-        if i == cantidad_comodin:
-            break
-    ###for registro in registros:
-        #cur.execute("""INSERT INTO envios(calle_num, ciudad, direccion, c_p, nombre, id_venta)
-        #VALUES (%s, %s, %s, %s, %s, %s)""", (registro[0], registro[1], registro[2], registro[3], registro[4], id_venta))
-        #mysql.connection.commit()
-    ## ---Insertar datos en detalleventa---
-    #obener datos de la tabla carrito_temp
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT id_producto, cantidad, precio FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    carrito = cur.fetchall()
-    #Obtener cantidad en numeri de productos que hay para el id_cliente
-    cur.execute("SELECT * FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    cantidad = cur.rowcount
-    #insertar valores a la tabla detalleventa
-    estado_venta = 'Pagado y Enviado'
+    #Guardarlo en una varible comodin
+    cantidad_productos = cantidad
+    print(cantidad_productos)
+    #Obtener solo la fecha actual
+    now = datetime.now()
+    fecha = now.date()
+    print(fecha)
+    #De la tabla de carrito_temp, obtener los id_producto, precio, cantidad, total del id_cliente
+    cur.execute("SELECT id_producto, precio, cantidad, total FROM carrito_temp WHERE id_cliente = "+str(session['user'])+";")
+    productos = cur.fetchall()
+    #Guardarlos en un arrelgo
+    informacion_productos = []
+    for producto in productos:
+        informacion_productos.append(producto)
     i = 0
-    while i < cantidad:
-        cur.execute(""" INSERT INTO detalleventa(id_venta, id_prod, cantidad, precio_vent, estado_vent)
-        VALUES (%s, %s, %s, %s, %s)""", (id_venta[i][0], carrito[i][0], carrito[i][1], carrito[i][2], estado_venta))
+    while cantidad_productos > i:
+        print(informacion_productos[i])
+        i = i + 1
+    #insertar los datos a la tabla ventas_realizadas
+    i = 0
+    while cantidad_productos > i:
+        cur.execute("""INSERT INTO ventas_realizadas(id_prod, id_cliente, fecha_venta, cantidad_de_producto, total_de_venta, estado_de_venta) 
+        VALUES (%s, %s, %s, %s, %s, %s)""", (informacion_productos[i][0], session['user'], fecha, informacion_productos[i][2], informacion_productos[i][3], 'Enviado'))
         mysql.connection.commit()
         i = i + 1
-        if i == cantidad_comodin:
-            break
-    # ---Actualizar tablas con el nuevo id_detalle---
-    #Obtener cantidad en numeri de productos que hay para el id_cliente
-    cur.execute("SELECT * FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    cantidad = cur.rowcount
-    #obtener  todos los id_detalle de la tabla detalleventa
-    detalles_ventas = []
+    #Alterar la tabla producto, restando las existencias de los productos comprados
     i = 0
-    while cantidad > 0:
-        cur.execute("SELECT id_detalle FROM detalleventa WHERE id_venta = %s", [id_venta[i][0]])
-        id = cur.fetchone()
-        detalles_ventas.append(id[0])
-        cantidad = cantidad - 1
-        i = i + 1
-        if i == cantidad_comodin:
-            break
-    #Obtener cantidad en numeri de productos que hay para el id_cliente
-    cur.execute("SELECT * FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    cantidad = cur.rowcount
-    #obtener todos los id_envio de la tabla envios
-    envios = []
-    i = 0
-    while cantidad > 0:
-        cur.execute("SELECT id_envio FROM envios WHERE id_venta = %s", [id_venta[i][0]])
-        id = cur.fetchone()
-        envios.append(id[0])
-        cantidad = cantidad - 1
-        i = i + 1
-        if i == cantidad_comodin:
-            break
-    #Obtener cantidad en numeri de productos que hay para el id_cliente
-    cur.execute("SELECT * FROM carrito_temp WHERE id_cliente = %s", [session['user']])
-    cantidad = cur.rowcount
-    #volver a obtener todos el id_venta
-    id_venta = []
-    i = 0
-    cur.execute("SELECT id_venta FROM venta WHERE id_cliente = %s", [session['user']])
-    id = cur.fetchall()
-    while cantidad > 0:
-        id_venta.append(id[i][0])
-        cantidad = cantidad - 1
-        i = i + 1
-        if i == cantidad_comodin:
-            break
-    #actualizar la tabla venta con el id_detalle y el id_envio
-    i = 0
-    while i < cantidad_comodin:
-        print(i)
-        print(detalles_ventas[i])
-        print(envios[i])
-        print(id_venta[i])
-        cur.execute("UPDATE venta SET id_detalle = %s, id_envio = %s WHERE id_venta = %s", (detalles_ventas[i], envios[i], id_venta[i]))
+    while cantidad_productos > i:
+        cur.execute("""UPDATE producto SET existencias = existencias - %s WHERE id_prod = %s""", (informacion_productos[i][2], informacion_productos[i][0]))
         mysql.connection.commit()
         i = i + 1
-        if i == cantidad_comodin:
-            break
-    #actualziar la tavla envios con el id_detalle
+    #Obtner los id_carro del id_cliente
+    cur.execute("SELECT id_carro FROM carrito_temp WHERE id_cliente = "+str(session['user'])+";")
+    id_carro = cur.fetchall()
+    #Guardarlos en un arreglo
+    id_carro_cliente = []
+    for id_carros in id_carro:
+        id_carro_cliente.append(id_carros)
     i = 0
-    while i < cantidad_comodin:
-        cur.execute("UPDATE envios SET id_detalle = %s WHERE id_venta = %s", (detalles_ventas[i], id_venta[i]))
+    while cantidad_productos > i:
+        print("ID_CARRO_CLIENTE" + str(id_carro_cliente[i]))
+        i = i + 1
+    #Borrar los registros de carrito_temp dependiendo del id_carro y id_cliente
+    i = 0
+    while cantidad_productos > i:
+        cur.execute("DELETE FROM carrito_temp WHERE id_carro = "+str(id_carro_cliente[i][0])+" AND id_cliente = "+str(session['user'])+";")
         mysql.connection.commit()
         i = i + 1
-        if i == cantidad_comodin:
-            break
-    return render_template('listo.html')
+    return render_template('listo.html', cliente=session['user'])
 
 @app.route('/sangre_indio')
 def producto1():
@@ -449,6 +373,26 @@ def producto(prod):
     cur.execute("SELECT * FROM producto WHERE nombre_prod = %s;", [prod])
     data = cur.fetchone()
     return render_template('template.html', registros=data)
+
+#ecuesta
+@app.route('/Califiquenos')
+def Califiquenos():
+    return render_template('encuesta.html')
+@app.route('/Califiquenos/finalizado', methods=['POST', 'GET'])
+def Califiquenos2():
+    return render_template('listo.html')
+#pedidos
+@app.route('/ver/pedidos/')
+def ver_pedidos():
+    #Ejeuta consulta para obtener los pedidos
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT producto.imagen, producto.nombre_prod, producto.precio, ventas_realizadas.cantidad_de_producto, ventas_realizadas.total_de_venta, ventas_realizadas.estado_de_venta FROM producto, ventas_realizadas
+    WHERE producto.id_prod = ventas_realizadas.id_prod AND ventas_realizadas.id_cliente = %s;""", (str(session['user'])))
+    data = cur.fetchall()
+    #Ejecutar la siguiente consulta para obtener la direccion del cliente
+    cur.execute("""SELECT concat_ws(' ', calle_num, colonia, c_p, ciudad) as Direccion FROM cliente WHERE id_cliente= %s;""", (str(session['user'])))
+    data2 = cur.fetchone()
+    return render_template('ver_pedidos.html', registros=data, registros2=data2)
 
 ##############################################################################################
 #APP functions

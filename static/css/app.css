@@ -397,6 +397,31 @@ img {
     color: var(--blanco);
 }
 
+.procesopago__contenido {
+    padding: 2rem;
+    color: #FFF;
+}
+
+.procesopago__enlace {
+    margin-top: 2rem;
+    display: block;
+    text-decoration: none;
+    color: var(--blanco);
+    padding: 1rem 5rem;
+    border: 2px solid var(--primary);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    transition-property: background-color;
+    transition-duration: .3s;
+}
+
+.procesopago__enlace:hover {
+    background-color: var(--primary);
+    color: var(--blanco);
+}
+
 .entrada__texto {
     display: -webkit-box;
     -webkit-box-orient: vertical;
