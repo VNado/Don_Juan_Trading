@@ -1,0 +1,28 @@
+{% extends 'layout3.html' %}
+{% block title %}
+<title>Don Juan Trading: Admin</title>
+{% endblock %}
+{% block body %}
+
+<body>
+
+    <section>
+        <h3>Página prohibida para personal no autorizado.</h3>
+        <h4 style="text-align: center ;">Administrador</h4>
+
+        <div>
+            <div class="productos__grid">
+                {% for productos in registros %}
+                    <div class="producto">
+                        <div class="producto__contenido">
+                            <h3 class="producto__nombre">id:prod: {{ productos.1 }} id_Cliente {{productos.2}}</h3>
+                            <p class="producto__descripcion">Fecha: {{ productos.3 }}</p>
+                            <p class="producto__precio">Cantidad: {{ productos.4 }}, Total: {{ productos.5 }}, Estado:{{ productos.6 }}</p>
+                        </div><!--./producto-->
+                    </div>
+                {% endfor %}
+        </div>
+        <a href="{{ url_for('admin') }}">Regresar</a>
+        
+    </section>
+{% endblock %}

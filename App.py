@@ -11,10 +11,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 # MySQL configurations
-app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_HOST'] = 'proyecto001.cmu1nv4edpom.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = ''
+app.config['MYSQL_PASSWORD'] = '%QmhdHWs'
+app.config['MYSQL_DB'] = 'DonJuanTrading'
 mysql = MySQL(app)
 # App configurations
 app.secret_key = 'mysecretkey'
@@ -61,7 +61,14 @@ def index():
                 id_cliente = cur.fetchone()
                 session['user'] = id_cliente[0]
                 print(id_cliente[0])
-                return redirect(url_for('index'))
+                #Crear session de tipo de usuario de la tabla sesion
+                cur.execute("select tipo from sesion where id_cliente = '"+str(session['user'])+"';")
+                tipo = cur.fetchone()
+                session['tipo'] = tipo[0]
+                print(tipo[0])
+                if tipo[0] == 'Admin':
+                    return redirect(url_for('admin'))
+                return redirect(url_for('index')) 
     else:
         return render_template('index.html')
     
@@ -230,6 +237,13 @@ def registro4():
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO cliente(nombre, apellido, correo, contrasena, calle_num, colonia, c_p, ciudad, telefono, antiguedad) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (nombre, apellido, correo, contrasena, calle_num, colonia, c_p, ciudad, telefono, now.date()))
         mysql.connection.commit()
+        #Consultar el id del nuevo cliente
+        cur.execute("SELECT id_cliente FROM cliente WHERE correo = %s", [correo])
+        id_cliente = cur.fetchone()
+        id_cliente = id_cliente[0]
+        #Se insertan los datos en la tabla sesion
+        cur.execute("INSERT INTO sesion(id_cliente, tipo) VALUES (%s, %s)", (id_cliente, 'Cliente'))
+        mysql.connection.commit()
         #se avisa que se registro correctamente
         #flash('Registro exitoso!')
     session.pop('_flashes', None)
@@ -393,6 +407,68 @@ def ver_pedidos():
     cur.execute("""SELECT concat_ws(' ', calle_num, colonia, c_p, ciudad) as Direccion FROM cliente WHERE id_cliente= %s;""", ([str(session['user'])]))
     data2 = cur.fetchone()
     return render_template('ver_pedidos.html', registros=data, registros2=data2)
+
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE')
+def admin():
+    return render_template('admin.html')
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/ver/pedidos/')
+def ver_pedidos2():
+    #Ejeuta consulta para obtener los pedidos
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT producto.imagen, producto.nombre_prod, producto.precio, ventas_realizadas.cantidad_de_producto, ventas_realizadas.total_de_venta, ventas_realizadas.estado_de_venta FROM producto, ventas_realizadas
+    WHERE producto.id_prod = ventas_realizadas.id_prod;""")
+    data = cur.fetchall()
+    #Ejecutar la siguiente consulta para obtener la direccion del cliente
+    cur.execute("""SELECT concat_ws(' ', calle_num, colonia, c_p, ciudad) as Direccion FROM cliente;""")
+    data2 = cur.fetchall()
+    return render_template('ver_pedidos2.html', registros=data, registros2=data2)
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/ver/productos/')
+def ver_productos():
+    #Ejeuta consulta para obtener los pedidos
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT * FROM producto;""")
+    data = cur.fetchall()
+    return render_template('ver_productos.html', registros=data)
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/ver/clientes/')
+def ver_clientes():
+    #Ejeuta consulta para obtener los pedidos
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT * FROM cliente;""")
+    data = cur.fetchall()
+    return render_template('ver_clientes.html', registros=data)
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/ver/ventas/')
+def ver_ventas():
+    #Ejeuta consulta para obtener los pedidos
+    cur = mysql.connection.cursor()
+    cur.execute("""SELECT * FROM ventas_realizadas;""")
+    data = cur.fetchall()
+    return render_template('ver_ventas.html', registros=data)
+#admin eliminar producto
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/eliminar/producto/<string:prod>')
+def eliminar_producto(prod):
+    #Ejecutar la siguiente consulta para eliminar el producto
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM producto WHERE nombre_prod = %s;", [prod])
+    mysql.connection.commit()
+    #se avisa que se elimino correctamente
+    flash('Producto eliminado exitosamente!', 'success')
+    #limpiar flash
+    session.pop('_flashes', None)
+    #redireccionar a la pagina de ver productos
+    return redirect(url_for('ver_productos'))
+#admin eliminar cliente
+@app.route('/835D6DC88B708BC646D6DB82C853EF4182FABBD4A8DE59C213F2B5AB3AE7D9BE/eliminar/cliente/<string:cliente>')
+def eliminar_cliente(cliente):
+    #Ejecutar la siguiente consulta para eliminar el producto
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM cliente WHERE id_cliente = %s;", [cliente])
+    mysql.connection.commit()
+    #se avisa que se elimino correctamente
+    flash('Cliente eliminado exitosamente!', 'success')
+    #limpiar flash
+    session.pop('_flashes', None)
+    #redireccionar a la pagina de ver productos
+    return redirect(url_for('ver_clientes'))
 
 ##############################################################################################
 #APP functions

@@ -1,0 +1,45 @@
+{% extends 'layout3.html' %}
+{% block title %}
+<title>Don Juan Trading: Admin</title>
+{% endblock %}
+{% block body %}
+
+<body class="background__registro">
+
+    <section class="contenedor">
+        <h3>Página prohibida para personal no autorizado.</h3>
+        <h4 style="text-align: center ;">Ver pedidos</h4>
+
+        <div style="background-color:#262626 ;">
+            <div class="tablaa">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Estado del envío</th>
+                            <th>Direccion del envio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registros in registros %}
+                        <tr>
+                            <td><img src="{{ url_for('static', filename='img/'+registros.0+'') }}" alt=""></td>
+                            <td>{{ registros.1 }}</td>
+                            <td>{{ registros.2 }}</td>
+                            <td>{{ registros.3 }}</td>
+                            <td>{{ registros.4 }}</td>
+                            <td>{{ registros.5 }}</td>
+                            <td>{{ registros2.0 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </div>
+        </table>
+        </div>
+        <a class="botons" href="{{ url_for('admin') }}" style="background-color: #262626 ;">Regresar</a>
+    </section>
+{% endblock %}

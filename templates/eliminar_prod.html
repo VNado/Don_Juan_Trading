@@ -1,0 +1,17 @@
+{% extends 'layout3.html' %}
+{% block title %}
+<title>Don Juan Trading: Admin</title>
+{% endblock %}
+{% block body %}
+
+<body class="background__registro">
+
+    <section class="fomulario__registro">
+        <h3>Página prohibida para personal no autorizado.</h3>
+        <h4 style="text-align: center ;">Eliminar Producto</h4>
+
+        <a class="botons" href="{{ url_for('crearproducto') }}">Registar nuevo Producto</a>
+        <a class="botons" href="">Eliminar Producto</a>
+        
+    </section>
+{% endblock %}
