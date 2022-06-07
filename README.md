@@ -9,20 +9,7 @@ Pagia de prueba para la clase
 
 
 #Dar click derecho en la caprteta principal "/DonJuanTrading" abrir terminal
-#Ejecutar los siguientes comandos
-
-cd venv/Scripts/
-activate.bat
-
-#Cuando se ejecute el venv, teclear lo siguente.
-
-cd ../../
-python App.py
-
-#Finalmete abriri el archivo LocalHost.url
-
-#Si la venv no funciona
-	#ir a la carpeta principal
+#ir a la carpeta principal
 	#Abrir ahí una consola de coamndos (De prefenrencia como administrador)
 		#de no poder, llegar a esa carpeta manualmete
 	#Escribir lo siguiente: pip install -r requirements.txt
@@ -30,3 +17,8 @@ python App.py
 #Cuando todo este instalado
 	#Ejecutar el app.py
 		# python app.py
+
+#Ejecutar los siguientes comandos
+python App.py
+
+#Finalmete abriri el archivo LocalHost.url	
